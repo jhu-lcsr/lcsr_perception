@@ -1,0 +1,14 @@
+<launch>
+  <arg name="pcd"/>
+
+  <arg name="frame_id" default="camera_optical_link"/>
+
+  <node pkg="rviz" type="rviz" name="$(anon rviz)"
+    args="-d $(find manual_interactive_groundtruth)/groundtruth.rviz"/>
+
+  <node pkg="pcl_ros" type="pcd_to_pointcloud" name="$(anon pcd_to_pointcloud)"
+    args="$(arg pcd) 0.1">
+    <param name="frame_id" value="$(arg frame_id)"/>
+  </node>
+
+</launch>

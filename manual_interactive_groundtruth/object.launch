@@ -1,0 +1,15 @@
+<launch>
+  <arg name="mesh_uri"/>
+
+  <arg name="frame_id" default="camera_optical_link"/>
+
+  <node pkg="manual_interactive_groundtruth" type="mesh_marker_pub.py" name="$(anon mesh_marker_pub)">
+    <param name="mesh_uri" value="$(arg mesh_uri)"/>
+  </node>
+
+  <node pkg="tf" type="tf_echo" name="$(anon tf_echo)"
+    args="$(arg frame_id) /groundtruth"/>
+
+  <node pkg="lcsr_tf_tools" type="interactive_transform_publisher" name="$(anon itp)"
+    args="0 0 0 0 0 0 $(arg frame_id) /groundtruth 10"/>
+</launch>
