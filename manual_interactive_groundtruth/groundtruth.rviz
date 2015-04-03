@@ -7,10 +7,14 @@ Panels:
         - /Global Options1
         - /Status1
         - /Grid1/Offset1
-        - /InteractiveMarkers1
-        - /Marker1
-      Splitter Ratio: 0.55814
-    Tree Height: 421
+        - /TF1/Frames1
+        - /TF1/Tree1
+        - /gbeam_link_markers1/Status1
+        - /Node Controls1
+        - /Node Controls1/gbeam_node_01
+        - /Link Controls1
+      Splitter Ratio: 0.67658
+    Tree Height: 571
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -51,6 +55,20 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
+    - Class: rviz/TF
+      Enabled: false
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+      Marker Scale: 0.2
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        {}
+      Update Interval: 0
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -74,33 +92,283 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.002
-      Style: Flat Squares
+      Size (m): 0.003
+      Style: Spheres
       Topic: /cloud_pcd
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
     - Class: rviz/InteractiveMarkers
       Enable Transparency: true
-      Enabled: true
-      Name: InteractiveMarkers
+      Enabled: false
+      Name: Data Frame
       Show Axes: false
       Show Descriptions: true
-      Show Visual Aids: true
-      Update Topic: /interactive_transform_publisher/groundtruth/update
-      Value: true
-    - Class: rviz/Marker
+      Show Visual Aids: false
+      Update Topic: /interactive_transform_publisher/data_frame/update
+      Value: false
+    - Class: rviz/MarkerArray
       Enabled: true
-      Marker Topic: /groundtruth_marker
-      Name: Marker
+      Marker Topic: /gbeam_link_objects
+      Name: gbeam_link_markers
       Namespaces:
-        "": true
+        gbeam_link: true
       Queue Size: 100
       Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /gbeam_node_objects
+      Name: gbeam_node_markers
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_0
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_0/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_1
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_1/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_2
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_2/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_3
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_3/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_4
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_4/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_5
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_5/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_6
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_6/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_7
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_7/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_8
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_8/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_9
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_9/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_10
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_9/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_11
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_11/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_node_12
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_node_12/update
+          Value: false
+      Enabled: true
+      Name: Node Controls
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: true
+          Name: gbeam_link_0
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_0/update
+          Value: true
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_1
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_1/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_2
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_2/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_3
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_3/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_4
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_4/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_5
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_5/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_6
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_6/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_7
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_7/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_8
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_8/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_9
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_9/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_10
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_9/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_11
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_11/update
+          Value: false
+        - Class: rviz/InteractiveMarkers
+          Enable Transparency: true
+          Enabled: false
+          Name: gbeam_link_12
+          Show Axes: false
+          Show Descriptions: true
+          Show Visual Aids: false
+          Update Topic: /gbeam_link_12/update
+          Value: false
+      Enabled: true
+      Name: Link Controls
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: camera_optical_link
+    Fixed Frame: world
     Frame Rate: 30
   Name: root
   Tools:
@@ -121,30 +389,32 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.20899
+      Distance: 1.66076
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.028442
-        Y: 0.0964569
-        Z: 1.00578
+        X: 0.00250675
+        Y: 0.791226
+        Z: -0.354444
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.780203
+      Pitch: 0.359797
       Target Frame: world
       Value: Orbit (rviz)
-      Yaw: 3.72361
+      Yaw: 5.02463
     Saved: ~
 Window Geometry:
+  Camera:
+    collapsed: false
   Displays:
     collapsed: false
-  Height: 541
+  Height: 721
   Hide Left Dock: false
-  Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000015a000001e6fc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006700fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000000c00430061006d0065007200610200001831000000e3000005cf0000039dfc00000019000001e6000000e300fffffffa000000020100000003fb0000000c00430061006d0065007200610100000000ffffffff0000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670000000000ffffffff0000000000000000fb000000100044006900730070006c0061007900730100000000000002680000010f00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000001e6fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730100000019000001e6000000b300fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000077c0000003bfc0100000002fb0000000800540069006d006500000000000000077c0000023a00fffffffb0000000800540069006d00650100000000000004500000000000000000000002e9000001e600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730000000000ffffffff0000000000000000
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd00000004000000000000010f0000029afc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006700fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000000c00430061006d0065007200610200001a810000019e00000320000001d0fc000000190000029a0000010100000101fa000000020100000003fb0000000c00430061006d0065007200610100000000ffffffff0000006200000062fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670000000000ffffffff0000000000000000fb000000100044006900730070006c0061007900730100000000000002680000010f00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000453fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000001900000453000000b300fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000077c0000003bfc0100000002fb0000000800540069006d006500000000000000077c0000023a00fffffffb0000000800540069006d00650100000000000004500000000000000000000003f30000029a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730000000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -152,7 +422,7 @@ Window Geometry:
   Tool Properties:
     collapsed: false
   Views:
-    collapsed: false
-  Width: 1374
-  X: 2078
-  Y: 344
+    collapsed: true
+  Width: 1288
+  X: 6117
+  Y: 322

@@ -1,15 +1,27 @@
 <launch>
   <arg name="mesh_uri"/>
+  <arg name="object_class"/>
+  <arg name="file_id" default="0"/>
+  <arg name="file_path" default="/tmp"/>
 
-  <arg name="frame_id" default="camera_optical_link"/>
+  <arg name="input_file" default="$(arg file_path)/$(arg object_class)_poses_$(arg file_id).csv"/>
+  <arg name="output_file" default="$(arg file_path)/$(arg object_class)_poses_$(arg file_id).csv"/>
 
-  <node pkg="manual_interactive_groundtruth" type="mesh_marker_pub.py" name="$(anon mesh_marker_pub)">
+  <arg name="frame_id" default="data_frame"/>
+
+  <arg name="n_objects" default="1"/>
+  <arg name="marker_scale" default="0.2"/>
+
+  <node pkg="manual_interactive_groundtruth" type="mesh_marker_pub.py" name="$(anon mesh_marker_pub)" output="screen">
+    <param name="frame_id" value="$(arg frame_id)"/>
+    <param name="object_class" value="$(arg object_class)"/>
     <param name="mesh_uri" value="$(arg mesh_uri)"/>
+    <param name="n_objects" value="$(arg n_objects)"/>
+    <param name="marker_scale" value="$(arg marker_scale)"/>
+    <param name="input_file" value="$(arg output_file)"/>
+    <param name="output_file" value="$(arg output_file)"/>
   </node>
 
   <node pkg="tf" type="tf_echo" name="$(anon tf_echo)"
     args="$(arg frame_id) /groundtruth"/>
-
-  <node pkg="lcsr_tf_tools" type="interactive_transform_publisher" name="$(anon itp)"
-    args="0 0 0 0 0 0 $(arg frame_id) /groundtruth 10"/>
 </launch>

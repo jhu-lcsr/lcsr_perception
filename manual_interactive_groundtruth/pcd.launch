@@ -1,9 +1,9 @@
 <launch>
   <arg name="pcd"/>
 
-  <arg name="frame_id" default="camera_optical_link"/>
+  <arg name="frame_id" default="data_frame"/>
 
-  <node pkg="rviz" type="rviz" name="$(anon rviz)"
+  <node if="0" pkg="rviz" type="rviz" name="$(anon rviz)"
     args="-d $(find manual_interactive_groundtruth)/groundtruth.rviz"/>
 
   <node pkg="pcl_ros" type="pcd_to_pointcloud" name="$(anon pcd_to_pointcloud)"
@@ -11,4 +11,6 @@
     <param name="frame_id" value="$(arg frame_id)"/>
   </node>
 
+  <node pkg="lcsr_tf_tools" type="interactive_transform_publisher" name="$(anon itp)"
+    args="0 0 0 0 0 0 /world /data_frame 10" output="screen"/>
 </launch>
