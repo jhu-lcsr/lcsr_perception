@@ -80,3 +80,5 @@ rosrun rviz rviz -d $(rospack find manual_interactive_groundtruth)/groundtruth.r
 
 Once running RViz, you can enable or disable each object in the `Displays`
 panel, and move them around with the interactive markers.
+
+![doc_scrot](doc_scrot.png)
