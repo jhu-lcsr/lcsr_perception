@@ -54,9 +54,9 @@ class ObjectCloud():
             if initially_set:
                 self.objects[-1].moved = True
 
-        self.marker_pub = rospy.Publisher('%s_objects' % object_class, MarkerArray)
+        self.marker_pub = rospy.Publisher('%s_objects' % object_class, MarkerArray, queue_size=1)
 
-        r = rospy.Rate(30.0)
+        r = rospy.Rate(10.0)
         while not rospy.is_shutdown():
             msg = MarkerArray()
             for obj in self.objects:
@@ -108,7 +108,7 @@ class ObjectMarker():
 
         # create marker server
         self.name ="%s_%d" % (object_class, object_id) 
-        self.server = InteractiveMarkerServer(self.name)
+        self.server = InteractiveMarkerServer(self.name, q_size=1)
 
         # tf
         self.transform = TransformStamped(
