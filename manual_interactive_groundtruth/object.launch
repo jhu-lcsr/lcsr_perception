@@ -12,7 +12,7 @@
   <arg name="n_objects" default="1"/>
   <arg name="marker_scale" default="0.2"/>
 
-  <node pkg="manual_interactive_groundtruth" type="mesh_marker_pub.py" name="$(anon mesh_marker_pub)" output="screen">
+  <node pkg="manual_interactive_groundtruth" type="mesh_marker_pub.py" name="mesh_marker_pub_$(arg object_class)" output="screen">
     <param name="frame_id" value="$(arg frame_id)"/>
     <param name="object_class" value="$(arg object_class)"/>
     <param name="mesh_uri" value="$(arg mesh_uri)"/>
