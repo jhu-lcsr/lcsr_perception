@@ -228,6 +228,7 @@ class ObjectMarker():
         m.id = self.object_id
         m.type = Marker.MESH_RESOURCE
         m.mesh_resource = self.mesh_resource
+        m.mesh_use_embedded_materials = False
         m.scale.x = m.scale.y = m.scale.z = 1.0
         m.color.r = 1.0
         m.color.g = m.color.b = 0.2
