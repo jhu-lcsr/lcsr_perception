@@ -1,0 +1,44 @@
+<launch>
+  <arg name="ns" default="filter"/>
+  <arg name="in" default="0"/>
+  <arg name="out" default="1"/>
+
+  <arg name="filter_frame" value="filter_frame_$(arg out)"/>
+  <arg name="frame_id" default="camera_link"/>
+
+  <arg name="root_topic" default="depth_registered/points"/>
+
+  <arg unless="$(arg in)" name="input_topic" default="$(arg root_topic)"/>
+  <arg if="$(arg in)" name="input_topic" default="$(arg ns)/$(arg in)"/>
+
+  <arg name="output_topic" value="$(arg ns)/$(arg out)"/>
+
+  <node pkg="lcsr_tf_tools" 
+    type="interactive_transform_publisher"
+    name="interactive_pass_through_$(arg ns)_$(arg out)"
+    args="0 0 0 0 0 0  $(arg frame_id) $(arg filter_frame) 10"/>
+
+  <node pkg="nodelet" type="nodelet" name="pass_through_$(arg out)" args="standalone pcl/PassThrough">
+    <remap from="~input" to="$(arg input_topic)"/>
+    <remap from="~output" to="$(arg output_topic)"/>
+    <rosparam subst_value="true">
+      filter_field_name: 'z'
+      filter_limit_min: 0.0
+      filter_limit_max: 1000.0
+      input_frame: $(arg filter_frame)
+      output_frame: $(arg frame_id)
+    </rosparam>
+  </node>
+
+  <node pkg="nodelet" type="nodelet" name="pass_through_$(arg out)_inverse" args="standalone pcl/PassThrough">
+    <remap from="~input" to="$(arg input_topic)"/>
+    <remap from="~output" to="$(arg output_topic)_inverse"/>
+    <rosparam subst_value="true">
+      filter_field_name: 'z'
+      filter_limit_min: -1000.0
+      filter_limit_max: 0.0
+      input_frame: $(arg filter_frame)
+      output_frame: $(arg frame_id)
+    </rosparam>
+  </node>
+</launch>
