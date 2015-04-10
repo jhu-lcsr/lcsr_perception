@@ -232,7 +232,7 @@ class ObjectMarker():
         m.scale.x = m.scale.y = m.scale.z = 1.0
         m.color.r = 1.0
         m.color.g = m.color.b = 0.2
-        m.color.a = 0.5
+        m.color.a = 0.3
 
         # this works for orientation, but not position
         #m.pose = copy.copy(self.pose)
