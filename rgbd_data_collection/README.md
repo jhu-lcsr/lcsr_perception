@@ -7,5 +7,5 @@ This will collect `N_CLOUDS` point clouds in the current directory from the give
 `PointCloud2` topic:
 
 ```bash
-rosrun rgbd_data_collection pcd.bash N_CLOUDS /ros_topic_name
+rosrun rgbd_data_collection record_pcd.bash N_CLOUDS /ros_topic_name
 ```
