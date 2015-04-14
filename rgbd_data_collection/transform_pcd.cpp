@@ -41,6 +41,7 @@ main (int argc, char** argv)
   }
 
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
+  pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
 
   int pcd_index = 0;
   for(std::vector<std::string>::iterator it=pcd_filenames.begin();
@@ -63,7 +64,6 @@ main (int argc, char** argv)
     transform.translate(Eigen::Vector3f(t_xyz[0],t_xyz[1],t_xyz[2]));
     transform.rotate(Eigen::Quaternion<float>(q_wxyz[0], q_wxyz[1], q_wxyz[2], q_wxyz[3]));
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
     pcl::transformPointCloud (*cloud, *transformed_cloud, transform);
 
     boost::filesystem::path path = pcd_path.parent_path();

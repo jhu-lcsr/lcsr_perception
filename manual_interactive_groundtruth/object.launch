@@ -18,7 +18,7 @@
     <param name="mesh_uri" value="$(arg mesh_uri)"/>
     <param name="n_objects" value="$(arg n_objects)"/>
     <param name="marker_scale" value="$(arg marker_scale)"/>
-    <param name="input_file" value="$(arg output_file)"/>
+    <param name="input_file" value="$(arg input_file)"/>
     <param name="output_file" value="$(arg output_file)"/>
   </node>
 

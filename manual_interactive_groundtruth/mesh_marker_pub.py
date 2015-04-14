@@ -12,7 +12,7 @@ import rospy
 
 import threading
 
-from lcsr_barrett.wam_teleop import *
+import tf
 
 from std_msgs.msg import Header
 from visualization_msgs.msg import *
