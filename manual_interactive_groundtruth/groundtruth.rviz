@@ -6,12 +6,13 @@ Panels:
       Expanded:
         - /Global Options1
         - /Grid1/Offset1
-        - /TF1/Frames1
-        - /TF1/Tree1
         - /Point Cloud Data1
         - /gbeam_link markers1
-      Splitter Ratio: 0.66171
-    Tree Height: 436
+        - /gbeam_node markers1
+        - /Grid2
+        - /Grid2/Offset1
+      Splitter Ratio: 0.654275
+    Tree Height: 978
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -52,21 +53,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Class: rviz/TF
-      Enabled: false
-      Frame Timeout: 15
-      Frames:
-        All Enabled: false
-      Marker Scale: 0.2
-      Name: TF
-      Show Arrows: true
-      Show Axes: true
-      Show Names: false
-      Tree:
-        {}
-      Update Interval: 0
-      Value: false
-    - Alpha: 0.4
+    - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
         Max Value: -0.256082
@@ -104,6 +91,87 @@ Visualization Manager:
       Show Visual Aids: false
       Update Topic: /interactive_transform_publisher/data_frame/update
       Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        camera_link:
+          Value: true
+        data_frame:
+          Value: true
+        link_0:
+          Value: true
+        link_1:
+          Value: true
+        link_10:
+          Value: true
+        link_11:
+          Value: true
+        link_12:
+          Value: true
+        link_13:
+          Value: true
+        link_14:
+          Value: true
+        link_2:
+          Value: true
+        link_3:
+          Value: true
+        link_4:
+          Value: true
+        link_5:
+          Value: true
+        link_6:
+          Value: true
+        link_7:
+          Value: true
+        link_8:
+          Value: true
+        link_9:
+          Value: true
+        node_0:
+          Value: true
+        node_1:
+          Value: true
+        world:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: false
+      Show Axes: true
+      Show Names: false
+      Tree:
+        world:
+          camera_link:
+            {}
+          data_frame:
+            link_0:
+              {}
+            link_1:
+              {}
+            link_11:
+              {}
+            link_13:
+              {}
+            link_2:
+              {}
+            link_3:
+              {}
+            link_4:
+              {}
+            link_5:
+              {}
+            link_6:
+              {}
+            link_7:
+              {}
+            link_8:
+              {}
+            link_9:
+              {}
+      Update Interval: 0
+      Value: true
     - Class: rviz/InteractiveMarkers
       Enable Transparency: true
       Enabled: true
@@ -111,17 +179,35 @@ Visualization Manager:
       Show Axes: false
       Show Descriptions: true
       Show Visual Aids: false
-      Update Topic: /gbeam_link_groundtruth/update
+      Update Topic: /link_groundtruth/update
       Value: true
     - Class: rviz/InteractiveMarkers
       Enable Transparency: true
-      Enabled: true
+      Enabled: false
       Name: gbeam_node markers
       Show Axes: false
       Show Descriptions: true
       Show Visual Aids: false
-      Update Topic: /gbeam_node_groundtruth/update
-      Value: true
+      Update Topic: /node_groundtruth/update
+      Value: false
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: false
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: data_frame
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 61; 61; 61
@@ -146,32 +232,32 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.626131
+      Distance: 0.95516
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.735159
-        Y: 0.151545
-        Z: -0.459497
+        X: 0.277568
+        Y: 0.679894
+        Z: -0.000549316
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.284796
+      Pitch: 0.519797
       Target Frame: world
       Value: Orbit (rviz)
-      Yaw: 4.8709
+      Yaw: 5.89818
     Saved: ~
 Window Geometry:
   Camera:
     collapsed: false
   Displays:
     collapsed: false
-  Height: 556
+  Height: 1098
   Hide Left Dock: false
-  Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd00000004000000000000010f000001f5fc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006700fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000000c00430061006d0065007200610200001a810000019e00000320000001d0fc00000019000001f5000000e300fffffffa000000020100000003fb0000000c00430061006d0065007200610100000000ffffffff0000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670000000000ffffffff0000000000000000fb000000100044006900730070006c0061007900730100000000000002680000010f00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000453fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000001900000453000000b300fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000077c0000003bfc0100000002fb0000000800540069006d006500000000000000077c0000023a00fffffffb0000000800540069006d0065010000000000000450000000000000000000000427000001f500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730000000000ffffffff0000000000000000
+  Hide Right Dock: false
+  QMainWindow State: 000000ff00000000fd00000004000000000000010f00000413fc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006700fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000000c00430061006d0065007200610200001a810000019e00000320000001d0fc0000001900000413000000e300fffffffa000000020100000003fb0000000c00430061006d0065007200610100000000ffffffff0000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670000000000ffffffff0000000000000000fb000000100044006900730070006c0061007900730100000000000002680000010f00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000413fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000001900000413000000b300fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000077c0000003bfc0100000002fb0000000800540069006d006500000000000000077c0000023a00fffffffb0000000800540069006d00650100000000000004500000000000000000000005520000041300000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730000000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -179,7 +265,7 @@ Window Geometry:
   Tool Properties:
     collapsed: false
   Views:
-    collapsed: true
-  Width: 1340
-  X: 6336
-  Y: 622
+    collapsed: false
+  Width: 1916
+  X: 3840
+  Y: 80
