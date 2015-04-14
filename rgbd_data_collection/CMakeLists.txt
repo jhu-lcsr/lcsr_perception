@@ -82,6 +82,16 @@ catkin_package(
 #  DEPENDS system_lib
 )
 
+
+find_package(PCL REQUIRED)
+
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+add_executable (transform_pcd transform_pcd.cpp)
+target_link_libraries (transform_pcd ${PCL_LIBRARIES})
+
 ###########
 ## Build ##
 ###########
