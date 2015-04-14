@@ -40,6 +40,7 @@ class ObjectCloud():
             rospy.loginfo("reading poses from file: "+input_file)
             with open(input_file, 'rb') as csvfile:
                 posereader = csv.reader(csvfile, delimiter=' ')
+                next(posereader)
                 for x,y,z,qx,qy,qz,qw in posereader:
                     initial_poses.append(Pose(Point(float(x),float(y),float(z)),Quaternion(float(qx),float(qy),float(qz),float(qw))))
 
@@ -83,6 +84,7 @@ class ObjectCloud():
         # save the final poses of all modified objects
         rospy.loginfo("writing poses to file: "+output_file)
         with open(output_file, 'wb') as f:
+            f.write(str(len([o for o in self.objects if o.enabled]))+os.linesep)
             posewriter = csv.writer(f, delimiter=' ')
             for obj in self.objects:
                 if obj.enabled:
@@ -232,7 +234,7 @@ class ObjectMarker():
         m.scale.x = m.scale.y = m.scale.z = 1.0
         m.color.r = 1.0
         m.color.g = m.color.b = 0.2
-        m.color.a = 0.5
+        m.color.a = 0.3
 
         # this works for orientation, but not position
         #m.pose = copy.copy(self.pose)
