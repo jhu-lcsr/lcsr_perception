@@ -1,0 +1,69 @@
+<launch>
+  <arg name="CAMERA_NS" default="camera"/>
+  <!--<arg name="CAMERA_ID" default="A00363908112045A"/>-->
+  <arg name="CAMERA_ID" default="#1"/>
+  <arg name="cal" default="false" doc="enable this for on-line calibration"/>
+  <arg name="depth_registered_filtered" default="depth_registered"/>
+  <arg name="sim" default="false"/>
+
+  <!-- Kinect Pose -->
+  <!-- NOTE: Fast conversion via ipython: rpy = PyKDL.Rotation.Quaternion(*quat).GetRPY() -->
+  <!-- 1-15-15: Base xyz: ( 0.015300 0.920725 1.478590 ) rpy: ( -0.044473 0.969147 -0.101861 ) xyzw: ( 0.004060 0.466114 -0.034692 0.884035 ) -->
+  <!-- 1-15-15: hand-adjusted: Base xyz: ( 0.030 0.959 1.444 ) rpy: ( -0.198 0.965 -0.195 ) xyzw: ( -0.042 0.468 -0.040 0.882 ) -->
+  <!-- 1-15-15: post-recalibration: Base xyz: ( 0.010728 0.931354 1.472191 ) rpy: ( -0.132833 0.959912 -0.140195 ) xyzw: ( -0.026456 0.463714 -0.031420 0.885032 ) -->
+  <!-- 1-15-15: post-recalibration 1hand-adjusted: Base xyz: ( 0.043 0.940 1.477 ) rpy: ( -0.104 0.993 -0.148 ) xyzw: ( -0.010 0.478 -0.040 0.877 ) -->
+  <!-- 1-27-15: hand-adjusted / drift?: Base xyz: ( 0.055, 0.938, 1.458 ) rpy: ( -0.103 0.994 -0.147 ) xyzw: ( -0.010 0.478 -0.040 0.877 ) -->
+  <arg name="KINECT_XYZ" value="0.055 0.938 1.458"/>
+  <arg name="KINECT_RPY" value="-0.103 0.994 -0.147"/>
+  <arg name="KINECT_QUAT" value="-0.010 0.478 -0.040 0.877"/>
+  <!-- -0.347589 0.905459 -0.454736 -->
+
+  <!-- TF frame for camera base link -->
+  <node unless="$(arg cal)"
+    name="tf_world_to_camera_link"
+    pkg="lcsr_tf_tools"
+    type="interactive_transform_publisher"
+    output="screen"
+    args="$(arg KINECT_XYZ) $(arg KINECT_QUAT) /world /camera_link 10"/>
+
+  <!-- Spawn gazebo model / sensor -->
+  <param name="kinect_model"
+    command="$(find xacro)/xacro.py '$(find rgbd_sim)/kinect.urdf.xacro'
+    xyz:='$(arg KINECT_XYZ)'
+    rpy:='$(arg KINECT_RPY)'" />
+  <node name="$(anon urdf_spawner)"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    respawn="false" output="screen"
+    args="-b -urdf -model kinect -param kinect_model"/>
+
+  <!-- Define internal kinect TF frames -->
+  <include file="$(find rgbd_launch)/launch/kinect_frames.launch"/>
+
+  <!-- Nodelet pipeline just for filtered depth processing -->
+  <group ns="$(arg CAMERA_NS)">
+    <arg name="manager" value="camera_nodelet_manager" />
+    <include file="$(find rgbd_launch)/launch/includes/manager.launch.xml">
+      <arg name="name"                value="$(arg manager)" />
+      <arg name="debug"               value="false" />
+      <arg name="num_worker_threads"  value="4" />
+    </include>
+
+    <!-- launch filtered point cloud processing -->
+    <include file="$(find rgbd_launch)/launch/includes/processing.launch.xml">
+      <arg name="manager" value="$(arg manager)"/>
+      <arg name="rgb_processing" value="false"/>
+      <arg name="debayer_processing" value="false"/>
+      <arg name="ir_processing" value="false"/>
+      <arg name="disparity_processing" value="false"/>
+      <arg name="disparity_registered_processing" value="false"/>
+      <arg name="depth_processing" value="false"/>
+      <arg name="sw_registered_processing" value="false"/>
+      <!-- depth registered processing -->
+      <arg name="hw_registered_processing" value="true"/>
+      <arg name="depth_registered_processing" value="true"/>
+      <!-- filtered registered depth -->
+      <!--<arg name="depth_registered_filtered" value="depth_registered_filtered"/>-->
+    </include>
+  </group>
+</launch>

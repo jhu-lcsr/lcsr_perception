@@ -1,0 +1,23 @@
+<launch>
+  <arg name="vertical" default="false"/>
+  <arg name="static" default="false"/>
+
+  <arg name="x" default="0.5"/>
+  <arg name="y" default="0.95"/>
+  <arg name="z" default="0.5"/>
+
+  <arg if="$(arg vertical)" name="roll" default="1.5708"/>
+  <arg unless="$(arg vertical)" name="roll" default="0.0"/>
+  <arg name="pitch" default="0.0"/>
+  <arg name="yaw" default="0.0"/>
+
+  <arg name="pose_args" default="-x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
+
+  <param name="drill_model"
+    command="$(find xacro)/xacro.py '$(find lcsr_objects)/models/drill.urdf.xacro'  static:=$(arg static)" />
+  <node name="$(anon urdf_spawner)"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    respawn="false" output="screen"
+    args="-b -urdf -model $(anon gbeam_link) -param drill_model $(arg pose_args)"/>
+</launch>

@@ -1,0 +1,52 @@
+<launch>
+  <rosparam ns="models">
+    #- gbeam_link
+    #- gbeam_node
+    - drill
+    #- sander
+  </rosparam>
+  <rosparam ns="model_uris">
+    gbeam_link: 'package://gbeam_model/meshes/gbeam_link_38k_uniform.vtk'
+    gbeam_node: 'package://gbeam_model/meshes/gbeam_node_21k_uniform.vtk'
+    drill: 'package://lcsr_objects/meshes/bosch_hand_drill_collar_model_uniform.vtk'
+    sander: 'package://lcsr_objects/meshes/bosch_multitool_model_uniform.vtk'
+  </rosparam>
+  <rosparam ns="stl_uris">
+    gbeam_link: 'package://gbeam_model/meshes/gbeam_link_50k.stl'
+    gbeam_node: 'package://gbeam_model/meshes/gbeam_node_25k.stl'
+    drill: 'package://lcsr_objects/meshes/bosch_hand_drill_collar_model_uniform.stl'
+    sander: 'package://lcsr_objects/meshes/bosch_multitool_model_uniform.stl'
+  </rosparam>
+
+  <!-- ObjRec Parameters (in millimeter) -->
+  <param name="pair_width"                                    value="0.105"/>
+  <param name="voxel_size"                                    value="0.0035"/>
+  <param name="hashtable_filter_ratio"                                    value="0.8"/>
+  <param name="z_distance_threshold_as_voxel_size_fraction"   value="3.0"/>
+  <param name="normal_estimation_radius"                      value="3"/>
+  <param name="object_visibility"                             value="0.25"/>
+  <param name="relative_object_size"                          value="0.05"/>
+  <param name="relative_number_of_illegal_points"             value="0.03"/>
+  <param name="intersection_fraction"                         value="0.09"/>
+  <param name="num_threads"                                   value="1"/>
+  <param name="use_cuda"                                      value="true"/>
+  <param name="cuda_devices"                                  value="0 1"/>
+
+  <!-- Plane segmentation parameters -->
+  <param name="plane_thickness"                               value="0.015"/>
+  <param name="rel_num_of_plane_points"                       value="0.2"/>
+
+  <!-- Other Recognition Parameters -->
+  <param name="success_probability"                           value="0.99"/>
+  <param name="use_only_points_above_plane"                   value="false"/>
+  <param name="n_clouds_per_recognition" value="1"/>
+  <param name="downsample_voxel_size" value="0.001"/>
+
+  <!-- Clipping box -->
+  <param name="x_clip_min" value="-2.0"/>
+  <param name="x_clip_max" value="2.0"/>
+  <param name="y_clip_min" value="-2.0"/>
+  <param name="y_clip_max" value="2.0"/>
+  <param name="z_clip_min" value="-2.15"/>10
+  <param name="z_clip_max" value="2.8"/>
+</launch>

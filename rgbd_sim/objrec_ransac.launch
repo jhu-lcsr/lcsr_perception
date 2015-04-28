@@ -1,0 +1,34 @@
+<launch>
+  <!-- objrec is leaky, valgrind report here: https://gist.githubusercontent.com/jbohren/47faa1329cd711c52a60/raw/c92205c294b3d9006cbaad5eb79f5b69ec9fb2de/objrec_valgrind_report -->
+  <arg name="leakcheck" default="false"/>
+  <arg if="$(arg leakcheck)" name="objrec_prefix_1" value="xterm -sl 32768 -hold -e valgrind --tool=memcheck --leak-check=yes"/>
+  <arg unless="$(arg leakcheck)" name="objrec_prefix_1" value=""/>
+
+  <arg name="nvprof" default="false"/>
+  <arg if="$(arg nvprof)" name="objrec_prefix_2" value="/usr/local/cuda/bin/nvprof"/>
+  <arg unless="$(arg nvprof)" name="objrec_prefix_2" value=""/>
+
+  <arg name="gdb" default="false"/>
+  <arg if="$(arg gdb)" name="objrec_prefix_3" value="xterm -e gdb --args"/>
+  <arg unless="$(arg gdb)" name="objrec_prefix_3" value=""/>
+
+  <arg name="objrec_prefix" value="$(arg objrec_prefix_1)$(arg objrec_prefix_2)$(arg objrec_prefix_3)"/>
+
+  <!-- ObjRec Parameters -->
+  <include ns="objrec" file="$(find rgbd_sim)/objrec_parameters.launch"/>
+
+  <!-- ObjRec Node -->
+  <node
+    name="objrec"
+    pkg="objrec_ros_integration"
+    type="objrec_node"
+    respawn="true"
+    launch-prefix="$(arg objrec_prefix)"
+    output="screen">
+    <remap from="~/pcl_points" to="$(arg input_topic)"/>
+    <remap from="~/points" to="$(arg input_topic)"/>
+    <remap from="~/recognized_objects" to="/recognized_objects"/>
+    <remap from="~/recognized_objects_markers" to="/recognized_objects_markers"/>
+    <remap from="~/foreground_points" to="/objrec_foreground_points"/>
+  </node>
+</launch>
