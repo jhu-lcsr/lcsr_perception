@@ -40,7 +40,7 @@ private:
   ros::Subscriber info_sub_l_, info_sub_r_;
 
   // Output
-  image_transport::ImageTransport unstacked_it_;
+  image_transport::ImageTransport left_it_, right_it_;
   image_transport::CameraPublisher cam_pub_l_, cam_pub_r_;
 
   // User callback

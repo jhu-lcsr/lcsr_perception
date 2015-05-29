@@ -5,21 +5,23 @@
 StereoUnstacker::StereoUnstacker() :
   nh_(),
   stacked_it_(ros::NodeHandle("stacked")),
-  unstacked_it_(ros::NodeHandle("unstacked"))
+  left_it_(ros::NodeHandle("unstacked/left")),
+  right_it_(ros::NodeHandle("unstacked/right"))
 {
   // Initialize the info sequence indices to 0
   info_l_.header.seq = 0;
   info_r_.header.seq = 0;
 
   // Subscribe to input topics
-  stacked_sub_ = stacked_it_.subscribe("image", 4, &StereoUnstacker::imageCB, this);
+  image_transport::TransportHints hints("compressed");
+  stacked_sub_ = stacked_it_.subscribe("image", 4, &StereoUnstacker::imageCB, this, hints);
 
   info_sub_l_ = nh_.subscribe("left/camera_info", 1, &StereoUnstacker::leftInfoCB, this);
   info_sub_r_ = nh_.subscribe("right/camera_info", 1, &StereoUnstacker::rightInfoCB, this);
 
   // Create stacked image publisher
-  cam_pub_l_ = unstacked_it_.advertiseCamera("left", 1);
-  cam_pub_r_ = unstacked_it_.advertiseCamera("right", 1);
+  cam_pub_l_ = left_it_.advertiseCamera("image", 1);
+  cam_pub_r_ = right_it_.advertiseCamera("image", 1);
 }
 
 void StereoUnstacker::leftInfoCB(const sensor_msgs::CameraInfoConstPtr& info_l)
