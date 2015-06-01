@@ -13,7 +13,9 @@ StereoUnstacker::StereoUnstacker() :
   info_r_.header.seq = 0;
 
   // Subscribe to input topics
-  image_transport::TransportHints hints("compressed");
+  ros::TransportHints ros_hints;
+  ros_hints.udp();
+  image_transport::TransportHints hints("compressed", ros_hints);
   stacked_sub_ = stacked_it_.subscribe("image", 4, &StereoUnstacker::imageCB, this, hints);
 
   info_sub_l_ = nh_.subscribe("left/camera_info", 1, &StereoUnstacker::leftInfoCB, this);

@@ -1,8 +1,10 @@
 
+#include <algorithm>
 #include <stacked_stereo_transport/stereo_stacker.h>
 
 StereoStacker::StereoStacker () :
   nh_(),
+  framerate_(15.0),
   stereo_it_(nh_),
   sync_(16)
 {
@@ -10,12 +12,18 @@ StereoStacker::StereoStacker () :
   info_l_.header.seq = 0;
   info_r_.header.seq = 0;
 
+  // Get framerate
+  ros::NodeHandle("~").getParam("framerate", framerate_);
+  framerate_ = std::max(0.0, std::max(framerate_, 120.0));
+
   // Subscribe to input topics
   image_subf_l_.subscribe(stereo_it_, "left/image", 4);
   image_subf_r_.subscribe(stereo_it_, "right/image", 4);
 
   info_sub_l_ = nh_.subscribe("left/camera_info", 1, &StereoStacker::leftInfoCB, this);
   info_sub_r_ = nh_.subscribe("right/camera_info", 1, &StereoStacker::rightInfoCB, this);
+
+  last_publish_time_ = ros::Time::now();
 
   // Create stacked image publisher
   stacked_it_.reset(new image_transport::ImageTransport(ros::NodeHandle("stacked")));
@@ -43,6 +51,12 @@ void StereoStacker::imageCB(
   if(info_l_.header.seq == 0 and info_r_.header.seq == 0) {
     return;
   }
+
+  if((ros::Time::now() - last_publish_time_).toSec() < 1.0 / framerate_) {
+    return;
+  }
+
+  last_publish_time_ = ros::Time::now();
 
   cv_bridge::CvImageConstPtr cv_left = cv_bridge::toCvShare(image_l, "bgr8");
   cv_bridge::CvImageConstPtr cv_right = cv_bridge::toCvShare(image_r, "bgr8");

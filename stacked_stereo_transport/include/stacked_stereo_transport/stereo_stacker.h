@@ -19,6 +19,8 @@
 class StereoStacker {
 private:
   ros::NodeHandle nh_;
+  double framerate_;
+  ros::Time last_publish_time_;
 
   // Cached camera info
   sensor_msgs::CameraInfo info_l_;
