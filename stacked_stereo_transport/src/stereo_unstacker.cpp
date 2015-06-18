@@ -77,14 +77,15 @@ void StereoUnstacker::imageCB(
   cv_right.toImageMsg(*right_img_msg_);
   cam_pub_r_.publish(right_img_msg_, info_r_);
 
+  // Measure publication rate
   ros::WallTime pub_time = ros::WallTime::now();
   pub_rate_ = 0.1*1.0/(pub_time - last_pub_time_).toSec() + 0.9*pub_rate_;
   last_pub_time_ = pub_time;
-  ROS_INFO_STREAM(pub_rate_<<" Hz: Pub in "<<(pub_time - start).toSec()<<" s");
+  ROS_DEBUG_STREAM(pub_rate_<<" Hz: Pub in "<<(pub_time - start).toSec()<<" s");
 
   // Call user callback
   if(user_cb_) {
-    user_cb_(left_img_msg_, right_img_msg_);
+    user_cb_(image_stacked->header, left_img_msg_, right_img_msg_);
   }
 }
 

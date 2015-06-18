@@ -12,6 +12,7 @@ include_directories(include)
 
 catkin_package(
   INCLUDE_DIRS include
+  LIBRARIES stereo_stacking
 )
 
 ## Declare a cpp executable
