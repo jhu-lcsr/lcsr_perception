@@ -31,8 +31,14 @@ private:
   ros::NodeHandle nh_;
 
   // Cached camera info
-  sensor_msgs::CameraInfo info_l_;
-  sensor_msgs::CameraInfo info_r_;
+  sensor_msgs::CameraInfoPtr info_l_;
+  sensor_msgs::CameraInfoPtr info_r_;
+
+  sensor_msgs::ImagePtr left_img_msg_;
+  sensor_msgs::ImagePtr right_img_msg_;
+
+  ros::WallTime last_pub_time_;
+  double pub_rate_;
 
   // Input
   image_transport::ImageTransport stacked_it_;
