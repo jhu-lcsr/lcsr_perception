@@ -70,11 +70,25 @@ void StereoUnstacker::imageCB(
       "bgr8",
       stacked(cv::Rect(0,stacked.rows/2,stacked.cols,stacked.rows/2)));
 
+  // Call user callback
+  ros::Time stamp = image_stacked->header.stamp;
+  if(user_cb_) {
+    stamp = user_cb_(image_stacked->header, left_img_msg_, right_img_msg_);
+  }
+
+  if(stamp != image_stacked->header.stamp) {
+    ROS_DEBUG_STREAM("Rewrote stacked stereo stamp! "<<image_stacked->header.stamp<<" -> "<<stamp);
+  }
+
   // Republish
   cv_left.toImageMsg(*left_img_msg_);
+  info_l_->header.stamp = stamp;
+  left_img_msg_->header.stamp = stamp;
   cam_pub_l_.publish(left_img_msg_, info_l_);
 
   cv_right.toImageMsg(*right_img_msg_);
+  info_r_->header.stamp = stamp;
+  right_img_msg_->header.stamp = stamp;
   cam_pub_r_.publish(right_img_msg_, info_r_);
 
   // Measure publication rate
@@ -82,11 +96,6 @@ void StereoUnstacker::imageCB(
   pub_rate_ = 0.1*1.0/(pub_time - last_pub_time_).toSec() + 0.9*pub_rate_;
   last_pub_time_ = pub_time;
   ROS_DEBUG_STREAM(pub_rate_<<" Hz: Pub in "<<(pub_time - start).toSec()<<" s");
-
-  // Call user callback
-  if(user_cb_) {
-    user_cb_(image_stacked->header, left_img_msg_, right_img_msg_);
-  }
 }
 
 void StereoUnstacker::registerCB(const StereoCallbackType &user_cb) {

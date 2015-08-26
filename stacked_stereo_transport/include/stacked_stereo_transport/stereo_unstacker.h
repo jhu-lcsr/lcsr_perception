@@ -17,7 +17,7 @@
 class StereoUnstacker {
 public:
 
-  typedef boost::function< void(const std_msgs::Header &header, const sensor_msgs::ImageConstPtr &, const sensor_msgs::ImageConstPtr &)> StereoCallbackType;
+  typedef boost::function< ros::Time(const std_msgs::Header &header, const sensor_msgs::ImageConstPtr &, const sensor_msgs::ImageConstPtr &)> StereoCallbackType;
 
   StereoUnstacker();
 
